@@ -1,0 +1,601 @@
+% This file was converted to LaTeX by Writer2LaTeX ver. 1.2.1
+% see http://writer2latex.sourceforge.net for more info
+\documentclass[letterpaper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb,amsfonts,textcomp}
+\usepackage{color}
+\usepackage{array}
+\usepackage{hhline}
+\usepackage{hyperref}
+\hypersetup{pdftex, colorlinks=true, linkcolor=blue, citecolor=blue, filecolor=blue, urlcolor=blue, pdftitle=, pdfauthor=, pdfsubject=, pdfkeywords=}
+% Page layout (geometry)
+\setlength\voffset{-1in}
+\setlength\hoffset{-1in}
+\setlength\topmargin{0.9839in}
+\setlength\oddsidemargin{1.1811in}
+\setlength\textheight{9.0322in}
+\setlength\textwidth{6.1378in}
+\setlength\footskip{0.0cm}
+\setlength\headheight{0cm}
+\setlength\headsep{0cm}
+% Footnote rule
+\setlength{\skip\footins}{0.0469in}
+\renewcommand\footnoterule{\vspace*{-0.0071in}\setlength\leftskip{0pt}\setlength\rightskip{0pt plus 1fil}\noindent\textcolor{black}{\rule{0.0\columnwidth}{0.0071in}}\vspace*{0.0398in}}
+% Pages styles
+\makeatletter
+\newcommand\ps@Standard{
+  \renewcommand\@oddhead{}
+  \renewcommand\@evenhead{}
+  \renewcommand\@oddfoot{}
+  \renewcommand\@evenfoot{}
+  \renewcommand\thepage{\arabic{page}}
+}
+\makeatother
+\pagestyle{Standard}
+\title{}
+\author{}
+\date{2015-04-07}
+\begin{document}
+\clearpage\setcounter{page}{1}\pagestyle{Standard}
+{\centering
+\foreignlanguage{spanish}{\textcolor{black}{Instituto Tecnológico de Costa Rica}}
+\par}
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+{\centering
+\foreignlanguage{spanish}{\textcolor{black}{Área de Ingeniería en Computadores}}
+\par}
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+{\centering
+\foreignlanguage{spanish}{\textcolor{black}{Lenguajes, Compiladores e Intérpretes}}
+\par}
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+{\centering
+\foreignlanguage{spanish}{\textcolor{black}{Profesor: Kevin Moraga}}
+\par}
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+{\centering
+\foreignlanguage{spanish}{\textcolor{black}{Estudiantes: Victor Montero}}
+\par}
+
+{\centering
+\foreignlanguage{spanish}{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Nicolás Jiménez}}
+\par}
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+{\centering
+\foreignlanguage{spanish}{\textcolor{black}{Proyecto II: Acertijo en Prolog}}
+\par}
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+{\centering
+\foreignlanguage{spanish}{\textcolor{black}{I Semestre, 2015}}
+\par}
+
+
+\bigskip
+
+
+\bigskip
+
+{\centering
+Problema
+\par}
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+\ El problema propuesto, \ fue el de construir un programa computacional eficiente capaz de \ resolver un rompecabezas
+constituido por una figura y varias piezas provistas por el usuario, estas piezas deben ser acomodadas dentro de la
+figura de modo de que calcen por completo. El programa además debe probar el acomodamiento de piezas girándolas en 90
+grados, 180 grados y 270 grados. Finalmente dada la característica de Prolog de ser no determinístico (significa que no
+garantiza una única solución \ y tampoco \ garantiza que exista alguna solución), \ el programa debe mostrar cada
+posible solución si existe, en vez de una sola.
+
+
+\bigskip
+
+\ La forma en que se representan la figura y las piezas es con una lista de listas en donde los elementos se representan
+con una x, y en donde los elementos vacíos se representan con un o. Por último en la pregunta que se hace al programa
+se incluye además una variable sin instanciar. En esta variable no instanciada el programa intenta encontrar el o los
+valores correspondientes para que la pregunta resulte con un valor booleano verdadero. Este proceso de intentar
+encontrar el valor que implique que la pregunte se convierta en verdadera se llama unificación. La unificación es una
+característica notable de los lenguajes de programación del paradigma lógico. 
+
+
+\bigskip
+
+\ El problema propuesto conlleva varias implicaciones. Primero se debe aprender y comprender con denuedo el
+funcionamiento del paradigma lógico, el cual simboliza un gran reto. Este proyecto además envuelve varios de los
+conceptos más importantes desarrollados en la programación lógica como son: la unificación, reglas y hechos,
+recursividad, manejo de estructuras lógicas y los cut´s. 
+
+
+\bigskip
+
+\ Para poder resolver este problema se necesitan cubrir una serie de pasos que llevan directamente al resultado final. A
+continuación se explicará condensadamente la estrategia de solución usada en particular por nosotros para poder llevar
+acabo el proyecto.
+
+
+\bigskip
+
+\ El primer paso que se efectuó fue generar todas las posibles soluciones que se pueden tener para rellenar la figura
+con las piezas, tomando en consideración todas las rotaciones posibles. Como aclaración: Con posibles soluciones nos
+referimos a encontrar y almacenar todos los estados posibles de la figura, y esto significa: todos las posibles
+combinaciones de posiciones en la figura con todas las combinaciones de rotaciones posibles( 0 grados, 90 grados, 180
+grados y \ 270 grados). 
+
+
+\bigskip
+
+\ El segundo paso fue el de crear una función o regla capaz de manipular las matrices de fichas para lograr los giros de
+90 grados, 180 grados y 270 grados que se requieren para así posteriormente poder comparar las fichas con la figura de
+manera correcta.
+
+
+\bigskip
+
+\ El tercer paso necesario que se realizó fue el de comparar si las fichas al menos caben dentro de la matriz de la
+figura, de esta forma se descartan varias posibles soluciones fallidas, en esta parte además se prueba que en donde la
+posible figura se desee colocar haya un espacio no vacío, lo cual implica que sea un espacio idóneo para la colocación
+de la ficha.
+
+
+\bigskip
+
+\ El último paso y además el más complicado es el de intentar colocar las piezas en la figura de manera que este sea
+completado o llenado, para realizar esto se toman las soluciones que pasaron por el filtro anterior y se intentan
+colocar en la figura contemplando cada rotación y posible ubicación en las coordenadas de la figura.
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+{\centering
+Ambiente de Desarrollo
+\par}
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+\ En esta sección se comentará acerca del ambiente de desarrollo utilizado para la construcción del programa de prolog,
+asimismo se comentarán algunas de las generalidades de este lenguaje de programación que resulten pertinentes.
+
+
+\bigskip
+
+\ Para el desarrollo del programa se escogió el ambiente de programación SWI-Prolog. El cual es una implementación de
+código abierto del lenguaje de programación Prolog. Este ambiente de desarrollo es realmente uno muy conveniente debido
+a la cantidad extensa de bibliotecas que añaden gran funcionalidad al lenguaje. Además de poseer capacidad de interfaz
+gráfica lo cual lo hace único. Finalmente incluye una documentación muy completa que explica cada biblioteca incluida
+así como cada método. 
+
+
+\bigskip
+
+\ El SWI-Prolog es el compilador utilizado para programar, sin embargo el código se escribió en el editor de texto:
+Sublime Text 2, el cual incluye herramientas que hacen el proceso de escritura de código más amigable, como resaltado
+de texto útil para este lenguaje en cuestión.
+
+
+\bigskip
+
+\ Prolog es un lenguaje de programación del paradigma lógico, de hecho es el más conocido y utilizado, siendo por lo
+tanto el lenguaje lógico por excelencia. El programa básicamente consiste en dos partes: 
+
+
+\bigskip
+
+La base de conocimiento: Esta parte del lenguaje es donde se escribe el programa para luego ser compilado y ejecutado.
+Para poder crear la base de conocimiento se puede utilizar cualquier editor, como se mencionó anteriormente se utilizó
+el editor Sublime Text 2. 
+
+
+\bigskip
+
+La parte de preguntas, Prolog es un lenguaje de queries( preguntas), en donde se intentan conseguir valores de verdad.
+En esta parte fue donde se utilizó SWI- Prolog, en esta parte además es donde está el compilador y donde se monta el
+archivo de base de conocimiento generado previamente.
+
+Por último en Prolog aunque es complejo, consiste en básicamente dos estructuras para su funcionamiento: los hecho y las
+reglas. Los hechos son la estructura más simple de Prolog y sirven para indicar una relación siempre verdadera entre
+dos o más átomos. Por otro lado las reglas son la otra estructura importante, esta es similar a un hecho pero con la
+diferencia de que uno o varios átomos son verdaderos si y solo si se cumple una o varias condiciones estas pueden ser
+organizadas con el operador lógico AND o el OR.
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+{\centering
+\foreignlanguage{spanish}{Estructuras de datos usadas}
+\par}
+
+
+\bigskip
+
+
+\bigskip
+
+\ En esta sección se explican las estructuras de datos utilizadas en general y además como se representó y estructuró la
+figura del rompecabezas así como las distintas fichas que lo componen. Por último se habla de la forma en que se
+manipulan las dichas estructuras.
+
+
+\bigskip
+
+\ Como estructura de datos básica se utilizó las listas que Prolog tiene por defecto, las cuales fueron usadas
+vastamente ya que permiten almacenar los datos y por demás usos.
+
+
+\bigskip
+
+\ Para almacenar la figura del rompecabezas y las demás figuras que el programa utiliza se usó listas de listas, ya que
+su eficacia radica en el almacenamiento y manejo de estructuras bidimensionales como matrices. Profundizando un poco en
+su manipulación, el primer elemento( que además es una lista) se guardan los elementos que se encuentran en la parte
+superior de la figura, el segundo elemento se utiliza para almacenar las pieza ubicadas en el segundo nivel y así
+sucesivamente.
+
+
+\bigskip
+
+\ Como parte inicial de la solución de este problema, se crearon gran cantidad de soluciones de piezas las cuales
+incluyen cada tipo de rotación y posición, para poder manejar estas soluciones se utilizaron listas que almacenan, el
+nombre de la pieza, el tipo de rotación que posee( 0, 90, 180 o 270 grados) y finalmente su posición en coordenadas
+``x'' y ``y''.
+
+
+\bigskip
+
+\ Se explicará ahora un poco acerca de esas coordenadas anteriormente mencionadas. Estas coordenadas representan la
+posición de una pieza en la figura del rompecabezas, el cual es una matriz bidimensional. Las posiciones comienzan
+desde la esquina superior izquierda con x=1 y y=1, y se desplazan hacia la derecha y hacia abajo en una n y m cantidad
+de filas y columnas.
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+{\centering
+\foreignlanguage{spanish}{Instrucciones para ejecutar el programa[2028?]}
+\par}
+
+
+\bigskip
+
+
+\bigskip
+
+Para poder ejecutar este programa se deben satisfacer unos pocos requerimientos, los cuales se listan a continuación:
+
+{}-Tener una computadora con un sistema operativo GNU-Linux, como Ubuntu.
+
+{}-Tener instalado SWI-Prolog, para poder montar el programa y compilar.
+
+
+\bigskip
+
+Después de cerciorarse \ que se satisfacen las condiciones, se debe ejecutar el programa SWI-Prolog, después montar el
+archivo del programa de Prolog, para realizar esto se debe proveer su ubicación absoluta dentro de la computadora.
+
+
+\bigskip
+
+En este punto ya todo esta listo para proseguir con la pregunta la cual es como se ejecuta el procedimiento para
+finalmente obtener las soluciones de parte del programa. Para hacer la pregunta simplemente se debe escribir una
+instrucción de este tipo: \foreignlanguage{spanish}{figura (RepresentacionFigura, ListaPiezas, Solucion)}.
+
+
+\bigskip
+
+En donde representación figura es una matriz con todas los elementos que trae consigo la figura del rompecabezas. Y
+ListaPiezas es una matriz en donde cada elemento es una ficha a introducirse en el rompecabezas. Como nota importante,
+se debe tener en cuenta que si no es posible armar la figura el resultado es falso, lo cual implica que es imposible
+hacer la unificación de variables para producir un resultado verdadero.
+
+
+\bigskip
+
+
+\bigskip
+
+{\centering\sffamily
+Corridas de Ejemplo
+\par}
+
+
+\bigskip
+
+
+\bigskip
+
+{\sffamily
+Entrada: figura( [[x,x,x],[x,o,x]], [a, [x,x] ,[x,x]], [b, [x],[x]] ], Sol).}
+
+
+\bigskip
+
+{\sffamily
+Resultado: \ Sol=[(a,90,1,1), (b,0,1,3)].}
+
+{\sffamily
+\ \ \ \  \ Sol=[(b,0,1,1), (a,180,1,2)].}
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+{\centering
+\foreignlanguage{spanish}{Descripción de las principales relaciones}
+\par}
+
+
+\bigskip
+
+\foreignlanguage{spanish}{FALTA}
+
+\foreignlanguage{spanish}{\ Para la relación con la que se mueve una pieza se utiliza una regla que toma una matriz y la
+rota a 90 grados, 180 grados o 270 grados. Para poder realizar esto se deben realizar una serie de pasos los cuales se
+nombran a continuación. }
+
+
+\bigskip
+
+\foreignlanguage{spanish}{\ Un método útil para rotar una matriz es primero transponerla y luego intercambiar las
+columnas. Para obtener la matriz transpuesta se utilizó el método transpose de la biblioteca de SWI-Prolog clpfd.}
+
+
+\bigskip
+
+\foreignlanguage{spanish}{Al obtener la matriz transpuesta, finalmente solo se debe revertir el orden de todos los
+elementos de cada sub lista de la matriz, para poder realizar esto se utilizo el método reverse de prolog.}
+
+
+\bigskip
+
+\foreignlanguage{spanish}{Al hacer esto ya se obtiene una matriz completamente rotada en 90 grados. Si se desea la
+rotación de 180 grados solo se debe repetir el proceso otra vez, y consecuentemente con la rotación de 270 grados se
+debe repetir el proceso de nuevo otra vez más.}
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+{\centering
+Comentarios Finales
+\par}
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+{\centering
+Conclusiones
+\par}
+
+
+\bigskip
+
+
+\bigskip
+
+{}- Se comprobó que el paradigma de programación lógico es realmente útil en situaciones de resolver problemas
+recursivos y para situaciones en el que se necesitan varias soluciones en vez de una.
+
+
+\bigskip
+
+{}- Se concluye a partir del proyecto que SWI-Prolog es posiblemente la mejor herramienta para construir software en
+Prolog por la gran cantidad de documentación, bibliotecas y gran conveniencia.
+
+
+\bigskip
+
+{}- El paradigma de programación es bastante útil además para ampliar las capacidades de programación del ingeniero, ya
+que trae consigo un abanico nuevo de posibilidades.
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+{\centering
+Problemas Encontrados
+\par}
+
+
+\bigskip
+
+
+\bigskip
+
+\ Un problema importante que se tuvo fue el desconocimiento agudo del paradigma \ y de su funcionamiento. Por lo tanto
+se debió realizar una gran investigación para poder asimilar la mayor parte del lenguaje de programación Prolog en el
+menor tiempo posible.
+
+
+\bigskip
+
+\ Se tuvo gran dificultad comparar las fichas con las figuras, ya que el manejo de estructuras de matrices es bastante
+diferente a lo que se tenía anteriormente.
+
+
+\bigskip
+
+Otro problema que se enfrentó fue a la hora de usar el método append con dos variables no instanciadas ya que producía
+gran cantidad de errores en la solución de las listas.
+
+A modo de conclusión para esta sección el mayor reto o dificultad con el que se convivió fue el de cambiar el modo de
+pensar a un modo completamente diferente como es el paradigma de programación Lógico. Este paradigma impone gran
+cantidad de cambios en la lógica y la estructura de un programa funcional y orientado a objetos.
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+\end{document}
